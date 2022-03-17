@@ -1,0 +1,61 @@
+---------------------------------------------------------------------------------------------------------------------
+MANUAL Y CONVENCIONES PARA EL USO DE LA ESTRUCTURA DE DATOS DE MACHINE LEARNING: DICTO-DEATURE-MODEL (DDM)
+---------------------------------------------------------------------------------------------------------------------
+
+A partir de workshop2_G4_ml es que se da inicio a esta convención de estructura de datos para machine learning.
+Revisar ese documento para comenprender el contenido de este texto.
+
+    * creacion Dicture[linreg] = X, y, linreg.intercept_, linreg.coef_, y_pred_test, str(instancia/performance)
+    * creacion: Dicto[linreg] = data_linreg (DataFrame con una entrada, una columna por parámetro)
+    * creacion Model[linreg] = linreg, Dicture[linreg], Dicto[linreg]
+
+---------------------------------------------------------------------------------------------------------------------
+CONTENIDO
+---------------------------------------------------------------------------------------------------------------------
+(1)
+Dicto = {{key:value},{k:value},{},{},{},models}
+
+Dicto[key] = una tupla: 
+			posicion [0]: diccionario main, 	
+			posicion [i]: diccionario aux / i = 1,2,3,...
+
+Dicto.keys(): data_cruda, muestra1_nan, muestra2_nan, data, data_pred, muestra, muestra_pred, models
+
+Todos los keys contienen un tupla con diccionarios, excepto models que es un dataset por tener una posición única.
+
+---------------------------------------------------------------------------------------------------------------------
+(2)
+Dictures = {object, object, object, object, ..., str}
+
+Convencionalmente se crean antes de tener todos los objects:
+
+Dicture = {Object, int, int, int, ..., 'str'} / int = 0, 1: según va a ser necesario obtener el object o no
+
+Observar como uso str y 'str' (convencion)
+
+Dictures.keys()= una tupla:
+
+		posicion[0]: features X del modelo
+		posicion[1]: vector y del modelo
+		posicion[2]: un dataframe de 1x1 con el intercepto 
+		posicion[3]: un array con los coeficientes
+		posicion[4]: un array con y_pred (del mismo testing)*
+		posicion[i]: todos los valores de performance que sean hiperparámetros de otro modelo
+		posicion[-1]: dos posibilidades
+		
+			posicion[-1]_1: el modelo no va a ser entrenado, el str es la instancia
+			posicion[-1]_2: el modelo ya fue entrenado y se hace un str de los scores de performance
+
+---------------------------------------------------------------------------------------------------------------------
+(3)
+Model = {object,object, object}
+
+Convencionalmente solo modelos entrenados son catalogados dentro de este set
+
+Model = {Object, 1, 0}: en caso de no actualizar Dicto
+
+Model.keys()= una tupla:
+
+		posicion[0]: objeto tipo sklearn, algoritmo entrenado
+		posicion[1]: instancia de Dicture
+		posicion[2]: instancia de Dicto[models]*
